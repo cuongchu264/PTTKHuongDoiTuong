@@ -1,0 +1,24 @@
+@startuml
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+
+title System Context diagram for Ecommerce System
+
+Person(Admin, " Admin", "A admin of the shop, with personal shop accounts.")
+Person(customer, " Customer", "A customer of the shop, with personal shop accounts.")
+System_Boundary(c1,"System"){
+System(ecommerce_system, "Ecommerce System", "Displays sneakers for sale,takes,orders and payment.")
+
+System(mainframe, "Delivery system ", "Delivery system that ship orders to customers from an outside shipping service. Delivery system provided by Viettel Post")
+
+System_Ext(payment_system, "Payment Gateway", "Payment gateway provided by the VNPay.")
+}
+Rel(customer, ecommerce_system, "Uses")
+Rel(Admin, ecommerce_system, "Uses")
+Rel_Neighbor(ecommerce_system,mainframe,"Create and send order information through using iframe")
+Rel_Back(customer, mainframe, "Sends notification about order to")
+Rel_Back(customer, mainframe, "Ships sneaker to")
+Rel(ecommerce_system, payment_system, "Redirects payment to")
+@enduml
