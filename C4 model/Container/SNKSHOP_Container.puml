@@ -1,0 +1,40 @@
+    @startuml
+    !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+    ' uncomment the following line and comment the first to use locally
+    ' !include C4_Container.puml
+
+
+
+    LAYOUT_WITH_LEGEND()
+
+    title System Container diagram for Ecommerce System
+
+    Person(Admin, Admin, "A admin of the shop, with personal shop accounts")
+    Person(customer, Customer, "A customer of the shop, with personal shop accounts")
+
+
+    System_Boundary(c1, "Ecommerce System") {
+        Container(web_app, "Web Application for Customer", " VueJS", " Serves stactic website assets to customer.")
+        Container(webadmin_app, "Web Application for Admin", " VueJS", " Serves stactic website assets to admin.")
+        ContainerDb(database, "Database", "SQL Server", "Stores user information and shopping cart.")
+        Container(backend_api, "API Application", "ASP.Net Core", "Exposes API for shopping and persists shopping cart state/support user registation and authentication.")
+    }
+
+    System_Ext(payment_system, "Payment Gateway", "Payment gateway provided by the bank.")
+    System_Ext(delivery_system, "Delivery System", "Delivery system that ship orders to customers from an outside shipping service. Delivery system provided by Viettel Post")
+
+    Rel(customer, web_app, "Uses")
+    Rel(Admin, webadmin_app, "Uses")
+    Rel_Back(customer,delivery_system,"Sends notification about order to")
+    Rel_Back(customer,delivery_system,"Ships sneaker to ")
+
+    Rel(web_app, backend_api, "Call API")
+    Rel(webadmin_app, backend_api, "Call API")
+    Rel_Back_Neighbor(database, backend_api, "Reads from and writes to")
+    Rel_Neighbor(webadmin_app,delivery_system, "Create and send order information through using iframe ")
+    Rel(delivery_system,backend_api,"Send order's response to check shipped's order")
+
+    Rel(backend_api, payment_system, "Create an order and send order information")
+    Rel_Back(backend_api, payment_system, "Send order's result")
+
+    @enduml
