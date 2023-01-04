@@ -1,0 +1,22 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+' uncomment the following line and comment the first to use locally
+' !include C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title System Component diagram for Ecommerce System
+
+Component(web_app, "Web application for Admin","Component: Vuejs", "Run the application code with delivery screen.")
+Component(delivery, "Delivery System", ,"Delivery system that ship orders to customers from an outside shipping service. Delivery system provided by Viettel Post")
+
+Boundary(System, "Ecommerce System") {
+    Component(Controller, "DeliveryController", "Component ASP.NET Controller", " Receive and process requests")
+    Component(Service, "DeliveryService","Component ASP.NET Service", "Bussiness logic to retrieve data from ViettelPost to check shipped's order")
+
+    Rel(Controller, Service, "Uses")
+    Rel(web_app,Controller, "Make API call to [JSON/HTTPS]")
+    Rel(web_app,delivery,"Create and send order information through using iframe")
+    Rel(delivery,Service,"Send order's response to check shipped's order")
+}
+@enduml
