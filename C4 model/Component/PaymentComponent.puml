@@ -1,0 +1,28 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+' uncomment the following line and comment the first to use locally
+' !include C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title System Component diagram for Ecommerce System
+
+Component(web_app, "Web application for Customer","Component: Vuejs", "Run the application code with payment screen.")
+ComponentDb(db, "Sneaker Shop Database","Component MySql", "Stores Transaction Data")
+Component(payment, "Payment Gateway", ,"Payment Gateway provided by VNPay")
+
+Boundary(System, "Ecommerce System") {
+    Component(Controller, "VNPayController", "Component ASP.NET Controller", " Receive and process requests")
+    Component(Service, "VNPayService","Component ASP.NET Service", "Bussiness logic to create, send order information to VNPay. And handle response from VNPay")
+    Component(model, "TransactionModel", "Component ASP.NET Model", "provide data of transaction and interface to database")
+    Component(helper, " VNPayHelper", "Component ASP.NET Model", "Supporting VNPayService with some handle methods")
+
+    Rel(Controller, Service, "Uses")
+    Rel(Service, model, "Uses")
+    Rel(Service, helper, "Uses")
+    Rel(Service, payment, "Create and send order information")
+    Rel(payment,Service, "Send order's response")
+    Rel(model, db, "Read and Writes Data")
+    Rel(web_app,Controller, "Make API call to [JSON/HTTPS]")
+}
+@enduml
