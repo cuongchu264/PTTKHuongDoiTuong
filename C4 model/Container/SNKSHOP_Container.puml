@@ -14,10 +14,10 @@
 
 
     System_Boundary(c1, "Ecommerce System") {
-        Container(web_app, "Web Application for Customer", " VueJS", " Serves stactic website assets to customer.")
-        Container(webadmin_app, "Web Application for Admin", " VueJS", " Serves stactic website assets to admin.")
-        ContainerDb(database, "Database", "SQL Server", "Stores user information and shopping cart.")
-        Container(backend_api, "API Application", "ASP.Net Core", "Exposes API for shopping and persists shopping cart state/support user registation and authentication.")
+        Container(web_app, "Web Application for Customer", " VueJS", " Runs application code in customer's browser.")
+        Container(webadmin_app, "Web Application for Admin", " VueJS", " Runs application code in admin's browser.")
+        ContainerDb(database, "Database", "SQL Server", "Stores web data for admin and customer.")
+        Container(backend_api, "API Application", "ASP.Net Core", "Communicate, receive and handle requests from UI.")
     }
 
     System_Ext(payment_system, "Payment Gateway", "Payment gateway provided by the bank.")
