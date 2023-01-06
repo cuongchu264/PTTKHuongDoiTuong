@@ -7,13 +7,13 @@ LAYOUT_WITH_LEGEND()
 
 title System Component diagram for Ecommerce System
 
-Component(web_app, "Web application for Customer","Component: Vuejs", "Run application code in web browser with Brands screen.")
-ComponentDb(db, "Sneaker Shop Database","Component MySql", "Stores Brands")
+Component(web_app, "Web application for Customer","Component: Vuejs", "Run application code in web browser with Brands screen")
+ComponentDb(db, "Sneaker Shop Database","Component: SQLServer", "Read data")
 
-Boundary(System, "Ecommerce System") {
-    Component(Controller, "BrandsController", "Component ASP.NET Controller", "Receive and process requests ")
-    Component(Service, "Service","Component ASP.NET Service", "Bussiness logic to displaying Brands ")
-    Component(model, "Brands Model", "Component ASP.NET Model", "Provide data  of Brands model ")
+Boundary(System, "API Application") {
+    Component(Controller, "BrandsController", "Component: ASP.NET Controller", "Receive and process requests ")
+    Component(Service, "BrandsService","Component: ASP.NET Service", "Bussiness logic to displaying Brands ")
+    Component(model, "BrandsModel", "Component: ASP.NET Model", "Provide data  of Brands model ")
 
     Rel(Controller, Service, "Uses")
     Rel(Service, model, "Uses")

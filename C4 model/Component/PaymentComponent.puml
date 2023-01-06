@@ -3,19 +3,19 @@
 ' uncomment the following line and comment the first to use locally
 ' !include C4_Component.puml
 
-LAYOUT_WITH_LEGEND()
+LAYOUT_LEFT_RIGHT()
 
 title System Component diagram for Ecommerce System
 
-Component(web_app, "Web application for Customer","Component: Vuejs", "Run the application code with payment screen.")
-ComponentDb(db, "Sneaker Shop Database","Component MySql", "Stores Transaction Data")
+Component(web_app, "Web application for Customer","Component: Vuejs", "Run the application code with payment screen")
+ComponentDb(db, "Sneaker Shop Database","Component: SQLServer", "Stores Transaction Data")
 Component(payment, "Payment Gateway", ,"Payment Gateway provided by VNPay")
 
-Boundary(System, "Ecommerce System") {
-    Component(Controller, "VNPayController", "Component ASP.NET Controller", " Receive and process requests")
-    Component(Service, "VNPayService","Component ASP.NET Service", "Bussiness logic to create, send order information to VNPay. And handle response from VNPay")
-    Component(model, "TransactionModel", "Component ASP.NET Model", "provide data of transaction and interface to database")
-    Component(helper, " VNPayHelper", "Component ASP.NET Model", "Supporting VNPayService with some handle methods")
+Boundary(System, "API Application") {
+    Component(Controller, "VNPayController", "Component: ASP.NET Controller", " Receive and process requests")
+    Component(Service, "VNPayService","Component: ASP.NET Service", "Bussiness logic to create, send order information to VNPay. And handle response from VNPay")
+    Component(model, "TransactionModel", "Component: ASP.NET Model", "provide data of transaction and interface to database")
+    Component(helper, " VNPayHelper", "Component: ASP.NET Helper", "Supporting VNPayService with some handle methods")
 
     Rel(Controller, Service, "Uses")
     Rel(Service, model, "Uses")

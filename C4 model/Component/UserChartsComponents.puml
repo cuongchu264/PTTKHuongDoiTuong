@@ -3,17 +3,17 @@
 ' uncomment the following line and comment the first to use locally
 ' !include C4_Component.puml
 
-LAYOUT_WITH_LEGEND()
+LAYOUT_LEFT_RIGHT()
 
 title System Component diagram for Ecommerce System
 
-Component(web_app, "Web application for Customer","Component: Vuejs", "Run application code in web browser with UserCharts screen.")
-ComponentDb(db, "Sneaker Shop Database","Component MySql", "Stores UserCharts")
+Component(web_app, "Web application for Admin","Component: Vuejs", "Run application code in web browser with UserCharts screen")
+ComponentDb(db, "Sneaker Shop Database","Component SQLServer", "read data")
 
-Boundary(System, "Ecommerce System") {
-    Component(Controller, "UserChartsController", "Component ASP.NET Controller", "Receive and process requests ")
-    Component(Service, "Service","Component ASP.NET Service", "Bussiness logic to displaying UserCharts ")
-    Component(model, "UserCharts Model", "Component ASP.NET Model", "Provide data  of UserCharts model ")
+Boundary(System, "API Application") {
+    Component(Controller, "UserChartsController", "Component: ASP.NET Controller", "Receive and process requests ")
+    Component(Service, "UserChartsService","Component: ASP.NET Service", "Bussiness logic to displaying UserCharts ")
+    Component(model, "UserChartsModel", "Component: ASP.NET Model", "Provide data  of UserCharts model ")
 
     Rel(Controller, Service, "Uses")
     Rel(Service, model, "Uses")

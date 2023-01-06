@@ -7,16 +7,16 @@ LAYOUT_WITH_LEGEND()
 
 title System Component diagram for Ecommerce System
 
-Component(web_app, "Web application for Customer","Component: Vuejs", "Run application code in web browser with DetailCart  screen.")
-ComponentDb(db, "Sneaker Shop Database","Component MySql", "Stores DetailCart ")
+Component(web_app, "Web application for Customer","Component: Vuejs", "Run application code in web browser with CartDetail screen.")
+ComponentDb(db, "Sneaker Shop Database","Component: SQLServer", "read data ")
 
-Boundary(System, "Ecommerce System") {
-    Component(Controller, "DetalCart Controller", "Component ASP.NET Controller", "Receive and process requests ")
-    Component(Service, "Service","Component ASP.NET Service", "Bussiness logic to displaying DetailCart  ")
-    Component(model, "Cart Model", "Component ASP.NET Model", "Provide data  of Cart  model ")
+Boundary(System, "API Application") {
+    Component(Controller, "CartDetailsController", "Component: ASP.NET Controller", "Receive and process requests ")
+    Component(Service, "CartDetailsService","Component: ASP.NET Service", "Bussiness logic to displaying CartDetail  ")
+    Component(model, "CartDetailsModel", "Component: ASP.NET Model", "Provide data  of CartDetail model ")
 
     Rel(Controller, Service, "Uses")
-    Rel(Service, model, "Call model Cart")
+    Rel(Service, model, "Uses")
     Rel(model, db, "Read")
     Rel(web_app,Controller, "Make API call to [JSON/HTTPS]")
 }

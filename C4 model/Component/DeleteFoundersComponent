@@ -7,16 +7,16 @@ LAYOUT_WITH_LEGEND()
 
 title System Component diagram for Ecommerce System
 
-Component(web_app, "Web application for Admin","Component: Vuejs", "Run application code in web browser with Founders screen.")
-ComponentDb(db, "Sneaker Shop Database","Component MySql", "Stores Founders")
+Component(web_app, "Web application for Admin","Component: Vuejs", "Run application code in web browser with Founders screen")
+ComponentDb(db, "Sneaker Shop Database","Component SQLServer", "delete data")
 
-Boundary(System, "Ecommerce System") {
-    Component(Controller, "FoundersController", "Component ASP.NET Controller", "Receive and process requests")
-    Component(Service, "Service","Component ASP.NET Service", "Bussiness logic to displaying Founders ")
-    Component(model, "Founders Model", "Component ASP.NET Model", "Provide data  of Founders model ")
+Boundary(System, "API Application") {
+    Component(Controller, "FoundersController", "Component: ASP.NET Controller", "Receive and process requests")
+    Component(Service, "FoundersService","Component: ASP.NET Service", "Bussiness logic to delete Founders ")
+    Component(model, "FoundersModel", "Component: ASP.NET Model", "Provide data of Founders model ")
 
-    Rel(Controller, Service, "Call")
-    Rel(Service, model, "Call")
+    Rel(Controller, Service, "Uses")
+    Rel(Service, model, "Uses")
     Rel(model, db, "Delete")
     Rel(web_app,Controller, "Make API call to [JSON/HTTPS]")
 }

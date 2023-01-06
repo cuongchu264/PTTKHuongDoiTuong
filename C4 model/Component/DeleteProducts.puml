@@ -7,16 +7,16 @@ LAYOUT_LEFT_RIGHT()
 
 title System Component diagram for Ecommerce System
 
-Component(web_app, "Web application for Admin","Component: Vuejs", "Run application code in web browser with DeleteProducts screen.")
-ComponentDb(db, "Sneaker Shop Database","Component MySql", "Stores Products  ")
+Component(web_app, "Web application for Admin","Component: Vuejs", "Run application code in web browser with DeleteProducts screen")
+ComponentDb(db, "Sneaker Shop Database","Component: SQLServer", "delete data  ")
 
-Boundary(System, "Ecommerce System") {
-    Component(Controller, "DeleteProducts Controller", "Component ASP.NET Controller", "Receive and process requests ")
-    Component(Service, "Service","Component ASP.NET Service", "Bussiness logic to displaying DeleteProducts  ")
-    Component(model, "Product Model", "Component ASP.NET Model", "Provide data  of Products model ")
+Boundary(System, "API Application") {
+    Component(Controller, "ProductsController", "Component: ASP.NET Controller", "Receive and process requests ")
+    Component(Service, "ProductsService","Component: ASP.NET Service", "Bussiness logic to deleting product  ")
+    Component(model, "ProductsModel", "Component: ASP.NET Model", "Provide data of Products model ")
 
     Rel(Controller, Service, "Uses")
-    Rel(Service, model, "call model Product")
+    Rel(Service, model, "Uses")
     Rel(model, db, "Delete")
     Rel(web_app,Controller, "Make API call to [JSON/HTTPS]")
 }

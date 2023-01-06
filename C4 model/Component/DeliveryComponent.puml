@@ -7,10 +7,10 @@ LAYOUT_WITH_LEGEND()
 
 title System Component diagram for Ecommerce System
 
-Component(web_app, "Web application for Admin","Component: Vuejs", "Run the application code with delivery screen.")
+Component(web_app, "Web application for Admin","Component: Vuejs", "Run the application code with delivery screen")
 Component(delivery, "Delivery System", ,"Delivery system that ship orders to customers from an outside shipping service. Delivery system provided by Viettel Post")
 
-Boundary(System, "Ecommerce System") {
+Boundary(System, "API Application") {
     Component(Controller, "DeliveryController", "Component ASP.NET Controller", " Receive and process requests")
     Component(Service, "DeliveryService","Component ASP.NET Service", "Bussiness logic to retrieve data from ViettelPost to check shipped's order")
 

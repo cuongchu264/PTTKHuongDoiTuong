@@ -3,20 +3,20 @@
 ' uncomment the following line and comment the first to use locally
 ' !include C4_Component.puml
 
-LAYOUT_LEFT_RIGHT()
+LAYOUT_WITH_LEGEND()
 
 title System Component diagram for Ecommerce System
 
-Component(web_app, "Web application for Admin","Component: Vuejs", "Run application code in web browser with AddProduct screen.")
-ComponentDb(db, "Sneaker Shop Database","Component MySql", "Stores Products  ")
+Component(web_app, "Web application for Admin","Component: Vuejs", "Run application code in web browser with AddProduct screen")
+ComponentDb(db, "Sneaker Shop Database","Component: SQLServer", "Stores Products data ")
 
-Boundary(System, "Ecommerce System") {
-    Component(Controller, "AddProduct  Controller", "Component ASP.NET Controller", "Receive and process requests ")
-    Component(Service, "Service","Component ASP.NET Service", "Bussiness logic to displaying AddProduct  ")
-    Component(model, "Products Model", "Component ASP.NET Model", "Provide data  of Products model ")
+Boundary(System, "API Application") {
+    Component(Controller, "ProductsController", "Component: ASP.NET Controller", "Receive and process requests ")
+    Component(Service, "ProductsService","Component: ASP.NET Service", "Bussiness logic to creating product  ")
+    Component(model, "ProductsModel", "Component ASP.NET Model", "Provide data  of Products model ")
 
     Rel(Controller, Service, "Uses")
-    Rel(Service, model, "call model Product")
+    Rel(Service, model, "Uses")
     Rel(model, db, "Write")
     Rel(web_app,Controller, "Make API call to [JSON/HTTPS]")
 }
